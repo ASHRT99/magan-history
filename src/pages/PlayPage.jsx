@@ -20,7 +20,7 @@ const PlayPage = () => {
 
   const fetchEvent = async () => {
     try {
-      const response = await fetch('https://magan.wuaze.com/get_event.php');
+      const response = await fetch('https://magan-history-api.onrender.com/get_event.php');
       const data = await response.json();
       setEvent({
         id: data.id,
@@ -29,9 +29,10 @@ const PlayPage = () => {
         hintRange: `${data.hintStartYear} - ${data.hintEndYear}`,
       });
     } catch (error) {
-      console.error("Failed to fetch event:", error);
+      console.error("❌ Failed to fetch event:", error);
     }
   };
+  
     
 
   const handleSubmit = (e) => {
