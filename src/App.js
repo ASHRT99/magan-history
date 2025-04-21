@@ -5,6 +5,7 @@ import GameSetup from './pages/GameSetup'; // ✅ THIS LINE
 import PlayerEntry from './pages/PlayerEntry'; // ✅ Add this
 import PlayPage from './pages/PlayPage'; // ✅ Add this line
 import ResultsPage from './pages/ResultsPage'; // ✅ Add this line
+import EndGame from './pages/EndGame'; // ✅ Add this
 
 function App() {
   return (
@@ -14,7 +15,8 @@ function App() {
         <Route path="/setup" element={<GameSetup />} />
         <Route path="/players" element={<PlayerEntry />} />
         <Route path="/play" element={<PlayPage />} />
-        <Route path="/results" element={<ResultsPage />} /> {/* ✅ Add this */}
+        <Route path="/results" element={<ResultsPage />} />
+        <Route path="/end" element={<EndGame />} /> {/* ✅ Add this */}
       </Routes>
     </Router>
   );

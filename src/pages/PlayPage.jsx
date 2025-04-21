@@ -14,17 +14,25 @@ const PlayPage = () => {
   useEffect(() => {
     const loadedPlayers = JSON.parse(sessionStorage.getItem('players')) || [];
     setPlayers(loadedPlayers);
-    fetchEvent();
+    fetchEvent(); 
   }, []);
+  
 
   const fetchEvent = async () => {
-    const mockEvent = {
-      title: 'تولى السلطان قابوس الحكم',
-      correctYear: 1970,
-      hintRange: '1800 - 2010'
-    };
-    setEvent(mockEvent);
+    try {
+      const response = await fetch('https://magan.wuaze.com/get_event.php');
+      const data = await response.json();
+      setEvent({
+        id: data.id,
+        title: data.title,
+        correctYear: parseInt(data.correctYear),
+        hintRange: `${data.hintStartYear} - ${data.hintEndYear}`,
+      });
+    } catch (error) {
+      console.error("Failed to fetch event:", error);
+    }
   };
+    
 
   const handleSubmit = (e) => {
     e.preventDefault();

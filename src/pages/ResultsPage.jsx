@@ -42,8 +42,17 @@ const ResultsPage = () => {
     setScores(currentScores);
   }, []);
 
-  const handleNextRound = () => {
-    navigate('/play');
+  const handleNext = () => {
+    const settings = JSON.parse(sessionStorage.getItem('gameSettings') || '{}');
+    const gameMode = settings.mode;
+    const totalRounds = settings.totalRounds;
+    const currentRound = Object.keys(JSON.parse(sessionStorage.getItem('guesses') || '{}')).length;
+
+    if (gameMode === 'rounds' && currentRound >= totalRounds) {
+      navigate('/end');
+    } else {
+      navigate('/play');
+    }
   };
 
   if (!event) return <div className="text-center mt-20">تحميل النتائج...</div>;
@@ -66,10 +75,10 @@ const ResultsPage = () => {
         </div>
 
         <button
-          onClick={handleNextRound}
+          onClick={handleNext}
           className="mt-8 w-full bg-[#117A65] hover:bg-[#0e5e50] text-white py-3 rounded-xl text-lg"
         >
-          الجولة التالية
+          {round === 1 ? 'بدء الجولة التالية' : 'التالي'}
         </button>
       </div>
     </div>
